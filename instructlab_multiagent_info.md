@@ -44,7 +44,7 @@ In a scenario where a customer calls a support center with a router issue, multi
 ## Sample Agent-Customer Support Interactions
 
 ### Interaction 1: Router Internet Disconnecting
-
+```yaml
 **Agent**: John (Teltop Customer Care Agent)  
 **Customer**: Emily (456-7890123)  
 **Issue**: Internet keeps disconnecting.  
@@ -52,11 +52,11 @@ In a scenario where a customer calls a support center with a router issue, multi
 **Resolution**: Yes, issue resolved during the call.  
 **Follow-up Action**: None needed.  
 **Customer's Phone Number**: 456-7890123  
-
+```
 ---
 
 ### Interaction 2: Router Not Powering On
-
+```yaml
 **Agent**: John (Teltop Customer Care Agent)  
 **Customer**: David (789-1234567)  
 **Issue**: Router not working, lights are off.  
@@ -64,11 +64,11 @@ In a scenario where a customer calls a support center with a router issue, multi
 **Resolution**: Yes, issue resolved during the call.  
 **Follow-up Action**: None needed.  
 **Customer's Phone Number**: 789-1234567  
-
+```
 ---
 
 ### Interaction 3: Slow Internet Speed
-
+```yaml
 **Agent**: John (Teltop Customer Care Agent)  
 **Customer**: Sarah (123-4567890)  
 **Issue**: Internet is slow.  
@@ -76,11 +76,11 @@ In a scenario where a customer calls a support center with a router issue, multi
 **Resolution**: Yes, issue resolved during the call.  
 **Follow-up Action**: None needed.  
 **Customer's Phone Number**: 123-4567890  
-
+```
 ---
 
 ### Interaction 4: Router Keeps Restarting
-
+```yaml
 **Agent**: John (Teltop Customer Care Agent)  
 **Customer**: Michael (456-7890123)  
 **Issue**: Router keeps restarting.  
@@ -88,11 +88,11 @@ In a scenario where a customer calls a support center with a router issue, multi
 **Resolution**: Yes, issue resolved during the call.  
 **Follow-up Action**: None needed.  
 **Customer's Phone Number**: 456-7890123  
-
+```
 ---
 
 ### Interaction 5: Router in Recovery Mode
-
+```yaml
 **Agent**: John (Teltop Customer Care Agent)  
 **Customer**: Lisa (789-1234567)  
 **Issue**: Router's lights are blinking, and there is no internet connection.  
@@ -100,7 +100,7 @@ In a scenario where a customer calls a support center with a router issue, multi
 **Resolution**: Yes, issue resolved during the call.  
 **Follow-up Action**: None needed.  
 **Customer's Phone Number**: 789-1234567  
-
+```
 ---
 
 ## Guidelines for Generating Synthetic Data
@@ -131,10 +131,90 @@ To simulate multi-agent systems, consider:
 ## Conclusion
 
 This knowledge base provides a structured template for generating agent-customer interactions, which can be used in **Instructlab** to create synthetic data. By utilizing multi-agent systems, customer support processes can become more efficient, with reduced response times, enhanced accuracy, and seamless collaboration among agents. This setup supports building use cases for multi-agent systems that interact to troubleshoot common customer issues effectively.
-"""
 
-output_file = "/mnt/data/knowledge-agent-support.md"
-with open(output_file, "w") as file:
-    file.write(markdown_content)
+# CrewAI: Multi-Agent Coordination Framework
 
-output_file
+## Overview
+
+**CrewAI** is a multi-agent framework designed for coordinating autonomous agents to perform tasks collaboratively in various scenarios, particularly those involving complex workflows like customer support, technical troubleshooting, and other service-oriented tasks.
+
+## Key Features of CrewAI
+
+### 1. Multi-Agent Coordination
+CrewAI allows multiple agents, each with their own specific roles and tasks, to work together on a single case or project. These agents can communicate with each other, share knowledge, and collaborate to achieve a common goal. For instance, in a call-center environment, one agent might handle customer verification, while another focuses on diagnosing technical issues.
+
+### 2. Task Automation
+CrewAI supports automating routine tasks, such as data gathering, problem diagnosis, and step-by-step guides for troubleshooting. This reduces the need for human intervention and accelerates the resolution process by enabling agents to take predefined actions based on the context of the task.
+
+### 3. Knowledge Sharing
+Agents in CrewAI can share knowledge and context with one another, allowing for better decision-making. For example, if one agent collects information from a customer, it can seamlessly pass that information to another agent specialized in technical fixes.
+
+### 4. Flexible Workflows
+CrewAI provides flexibility in creating and managing workflows. You can define various scenarios, specify the actions each agent should take, and set conditions for when an agent should intervene or escalate an issue.
+
+### 5. Scalability
+The framework supports scaling up the number of agents and tasks, making it well-suited for large-scale operations, such as customer support centers handling hundreds of simultaneous interactions.
+
+### 6. Agent Autonomy
+Each agent in CrewAI can operate independently, with pre-programmed knowledge of how to respond to different situations. These agents can also be instructed to escalate more complex issues to human agents when needed.
+
+## Example Use Cases
+
+### 1. Customer Support
+Multiple agents collaborate to help a customer with troubleshooting their internet connection, handling everything from identifying the issue to guiding the customer through corrective actions.
+
+### 2. Technical Assistance
+Agents provide step-by-step guides for customers trying to install software, update firmware, or reset hardware devices.
+
+### 3. Task Management
+Agents manage scheduling, reminders, and follow-up actions for ongoing customer cases, ensuring all issues are resolved in a timely manner.
+
+## Conclusion
+
+CrewAI provides a structured way to automate and manage multiple agents to enhance efficiency, particularly in service-based or technical environments where tasks can be standardized and escalated based on predefined workflows.
+
+
+## CrewAI example flow
+```yaml
+agents:
+  - name: John
+    role: Teltop Customer Care Agent
+    tasks:
+      - task: "Greet the customer and ask for their issue."
+      - task: "Request the customer’s account number or phone number for verification."
+      - task: "Diagnose the router issue based on the customer's description."
+      - task: "Guide the customer through basic troubleshooting steps."
+      - task: "If the issue persists, escalate to a specialized agent."
+  - name: Emily
+    role: Customer
+    phone_number: 456-7890123
+    issue: "Internet keeps disconnecting."
+    actions:
+      - action: "Provide phone number for verification."
+      - action: "Follow instructions for resetting the router."
+      - action: "Confirm if the issue is resolved."
+      
+interaction:
+  steps:
+    - agent: John
+      message: "Hello, this is John from Teltop customer care. How can I assist you today?"
+    - customer: Emily
+      message: "Hi John, I'm having trouble with my router. The internet keeps disconnecting."
+    - agent: John
+      message: "I’m sorry to hear that. Can you provide your account number or phone number?"
+    - customer: Emily
+      message: "Sure, it’s 456-7890123."
+    - agent: John
+      message: "Thanks, Emily. Let’s try restarting your router. Please unplug it, wait 30 seconds, and plug it back in."
+    - customer: Emily
+      message: "Okay, I’ve done that. The internet seems to be working now."
+    - agent: John
+      message: "Great! Sometimes a simple reset can fix the issue. Please let us know if you face further issues."
+    - customer: Emily
+      message: "Thank you, John. Appreciate your help."
+
+result:
+  resolution: "Issue resolved during the call."
+  follow_up: "No further action needed."
+```
+
